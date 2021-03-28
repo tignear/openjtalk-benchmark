@@ -1,0 +1,3 @@
+[submodule "KWDLC"]
+	path = KWDLC
+	url = https://github.com/ku-nlp/KWDLC.git
