@@ -4,7 +4,7 @@ const os = require("os");
 const path = require("path");
 const { encodeStream } = require("iconv-lite");
 const uniqueFilename = require("unique-filename");
-const { dictionary_dir, synthesis } = require("node-openjtalk-binding-discordjs");
+const { synthesis } = require("node-openjtalk-binding-discordjs");
 const { execFile } = require("child_process");
 function loadOrg(path_to_dir) {
   return fs.readdirSync(path_to_dir).flatMap(
@@ -12,7 +12,6 @@ function loadOrg(path_to_dir) {
   );
 }
 const sources = loadOrg(path.resolve(__dirname, "KWDLC", "org", "w201106-00000"));
-console.log(sources.join("\n"));
 async function synthesisFork(pathToOpenJTalk, pathToDict, pathToHTSVoice, text, charset) {
   const pathToCreatedFile = uniqueFilename(os.tmpdir(), "openjtalk-dst") + ".wav";
   const options = {
@@ -74,22 +73,39 @@ const pathToHTSVoice = path.resolve(__dirname, "hts_voice_nitech_jp_atr503_m001-
 const sjis_dictionary_dir = path.resolve(__dirname, "open_jtalk_dic_shift_jis-1.11");
 const suite = new Benchmark.Suite("OpenJtalk");
 suite.add("fork", {
-  defer: true, fn(d) {
+  defer: true, minSamples: 10, fn(d) {
     return Promise.all(
       sources.map(txt => synthesisFork("./open_jtalk.exe", sjis_dictionary_dir, pathToHTSVoice, txt, "Shift_JIS"))
     ).then(() => d.resolve(), console.error);
   }
 }).add("thread", {
-  defer: true, fn(d) {
+  defer: true, minSamples: 10, fn(d) {
     return Promise.all(
       sources.map(txt => new Promise(resolve => synthesis(txt, { htsvoice: pathToHTSVoice }).on("data", () => resolve())))
     ).then(() => d.resolve(), console.error);
   }
 }).on('cycle', (event) => {
-  console.log(String(event.target))
+  const target = event.target;
+  const stats = target.stats;
+  console.log(`${target.name}: mean:${stats.mean}sec, mean/number of entry: ${stats.mean / sources.length}sec, ±${stats.rme}% (sample count:${stats.sample.length})`);
 }).on('complete', () => {
   console.log(`Fastest is ${suite.filter('fastest').map('name')}`)
-}).run( {
-  maxTime:Infinity,
-  minSamples: 20
-});
+}).run();
+
+const suite_single = new Benchmark.Suite("OpenJtalk-Single");
+suite_single.add("fork", {
+  defer: true, minSamples: 100, fn(d) {
+    synthesisFork("./open_jtalk.exe", sjis_dictionary_dir, pathToHTSVoice, sources[0], "Shift_JIS").then(() => d.resolve())
+  }
+}).add("thread", {
+  defer: true,
+  minSamples: 100, fn(d) {
+    return new Promise(resolve => synthesis(sources[0], { htsvoice: pathToHTSVoice }).on("data", () => resolve())).then(() => d.resolve(), console.error);
+  }
+}).on('cycle', (event) => {
+  const target = event.target;
+  const stats = target.stats;
+  console.log(`${target.name}: mean:${stats.mean}sec, ±${stats.rme}% (sample count:${stats.sample.length})`);
+}).on('complete', () => {
+  console.log(`Fastest is ${suite_single.filter('fastest').map('name')}`)
+}).run();
