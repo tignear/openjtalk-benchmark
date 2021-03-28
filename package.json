@@ -1,0 +1,13 @@
+{
+  "name": "openjtalk-benchmark",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "tignear <tignear+m@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "iconv-lite": "^0.6.2",
+    "node-openjtalk-binding-discordjs": "^1.0.0-rc.2",
+    "unique-filename": "^1.1.1"
+  }
+}
