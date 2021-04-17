@@ -1,5 +1,5 @@
 const Benchmark = require('benchmark');
-const {fork,synthesis,sources,pathToHTSVoice} = require("./common");
+const {fork,synthesis,sources,htsvoice} = require("./common");
 
 const suite = new Benchmark.Suite("OpenJtalk");
 suite.add("fork-multi", {
@@ -11,7 +11,7 @@ suite.add("fork-multi", {
 }).add("thread-multi", {
   defer: true, minSamples: 10, fn(d) {
     return Promise.all(
-      sources.map(txt => new Promise(resolve => synthesis(txt, { htsvoice: pathToHTSVoice }).on("data", () => resolve())))
+      sources.map(txt => new Promise(resolve => synthesis(txt, { htsvoice }).on("data", () => resolve())))
     ).then(() => d.resolve(), console.error);
   }
 }).on('cycle', (event) => {

@@ -68,9 +68,10 @@ async function synthesisFork(pathToOpenJTalk, pathToDict, pathToHTSVoice, text, 
   }
 }
 const pathToHTSVoice = path.resolve(__dirname, "hts_voice_nitech_jp_atr503_m001-1.05/nitech_jp_atr503_m001.htsvoice");
+const htsvoice = fs.readFileSync(pathToHTSVoice);
 const sjis_dictionary_dir = path.resolve(__dirname, "open_jtalk_dic_shift_jis-1.11");
 const fork = process.platform === 'win32' ? txt => synthesisFork("./open_jtalk.exe", sjis_dictionary_dir, pathToHTSVoice, txt, "Shift_JIS") : txt => synthesisFork("./open_jtalk", dictionary_dir, pathToHTSVoice, txt);
 exports.fork = fork;
 exports.sources = sources;
 exports.synthesis = synthesis;
-exports.pathToHTSVoice = pathToHTSVoice;
+exports.htsvoice = htsvoice;

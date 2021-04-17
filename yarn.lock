@@ -449,17 +449,26 @@ node-gyp@^7.1.2:
     tar "^6.0.2"
     which "^2.0.2"
 
-node-openjtalk-binding-discordjs@^1.0.0-rc.2:
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/node-openjtalk-binding-discordjs/-/node-openjtalk-binding-discordjs-1.0.0-rc.2.tgz#efd8705c935914c51288eec33b6e317e26c9d572"
-  integrity sha512-SEE0YopHTfu8A0ew3alR2F3PCj06ebZKp6FRY3Z9UsuqeR9e+ZvsD0jY/7nCLIhtf6aFJPI4MJZg3N7WIjokXg==
+node-openjtalk-binding-discordjs@^1.0.0-rc.3:
+  version "1.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/node-openjtalk-binding-discordjs/-/node-openjtalk-binding-discordjs-1.0.0-rc.3.tgz#8b05d16aecbbc8cb6f50e855d5e2560fb934346d"
+  integrity sha512-OFX13KKLAzGWBmg8XQA+XXTAWFhb2cwXL6bj49xB8RcK3qPKEx2gkL/Gzb8L0BhlLop8GSL1VPPKIx66qy7Qxw==
   dependencies:
-    node-openjtalk-binding "^1.0.0-rc.6"
+    node-openjtalk-binding "^1.0.0-rc.11"
 
-node-openjtalk-binding@^1.0.0-rc.6:
-  version "1.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/node-openjtalk-binding/-/node-openjtalk-binding-1.0.0-rc.8.tgz#2e8d90164f09a105653af8eee79b4a86d541beed"
-  integrity sha512-UqIgHwiu6Syp1dg2gN5BCzq9rqcxnVvm3BAQfFawrydj3fBSn0hvrRDbqlubM7wSAURlTNOaEsAUTTXP6pOOTw==
+node-openjtalk-binding@1.0.0-rc.12:
+  version "1.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/node-openjtalk-binding/-/node-openjtalk-binding-1.0.0-rc.12.tgz#0697b45f6a12dd1028488cd02cea47b6afc87c90"
+  integrity sha512-ej8ZhP5tZPRiJ3aAZfLBsTam8hsMgARzjfu0DO4002+tMKH3xjrpQSaxv8Zcc2GUAlpcMKF0G4zBz+pOtwtfZQ==
+  dependencies:
+    bindings "^1.5.0"
+    node-addon-api "^3.1.0"
+    node-gyp "^7.1.2"
+
+node-openjtalk-binding@^1.0.0-rc.11:
+  version "1.0.0-rc.11"
+  resolved "https://registry.yarnpkg.com/node-openjtalk-binding/-/node-openjtalk-binding-1.0.0-rc.11.tgz#f91ccdff292cf6aa307ca661bc5a164f7212b4fd"
+  integrity sha512-hDxHekHNf0P8tViaYJl8KmXqzPC9f8rufmdPpfNWLkord0Xrwc2E0L64y7H4ZkuNuKdmuaMgBLxS8pWVXi4GLg==
   dependencies:
     bindings "^1.5.0"
     node-addon-api "^3.1.0"
