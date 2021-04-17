@@ -1,4 +1,3 @@
-const Benchmark = require('benchmark');
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -70,44 +69,8 @@ async function synthesisFork(pathToOpenJTalk, pathToDict, pathToHTSVoice, text, 
 }
 const pathToHTSVoice = path.resolve(__dirname, "hts_voice_nitech_jp_atr503_m001-1.05/nitech_jp_atr503_m001.htsvoice");
 const sjis_dictionary_dir = path.resolve(__dirname, "open_jtalk_dic_shift_jis-1.11");
-
-const fork = process.platform === 'win32' ? txt => synthesisFork("./open_jtalk.exe", sjis_dictionary_dir, pathToHTSVoice, txt, "Shift_JIS") : txt => synthesisFork("./open_jtalk", dictionary_dir, pathToHTSVoice, txt)
-
-const suite = new Benchmark.Suite("OpenJtalk");
-suite.add("fork-multi", {
-  defer: true, minSamples: 10, fn(d) {
-    return Promise.all(
-      sources.map(fork)
-    ).then(() => d.resolve(), console.error);
-  }
-}).add("thread-multi", {
-  defer: true, minSamples: 10, fn(d) {
-    return Promise.all(
-      sources.map(txt => new Promise(resolve => synthesis(txt, { htsvoice: pathToHTSVoice }).on("data", () => resolve())))
-    ).then(() => d.resolve(), console.error);
-  }
-}).on('cycle', (event) => {
-  const target = event.target;
-  const stats = target.stats;
-  console.log(`${target.name}: mean:${stats.mean}sec, mean/number of entry: ${stats.mean / sources.length}sec, ±${stats.rme}% (sample count:${stats.sample.length})`);
-}).on('complete', () => {
-  console.log(`Multi Fastest is ${suite.filter('fastest').map('name')}`)
-}).run();
-
-const suite_single = new Benchmark.Suite("OpenJtalk-Single");
-suite_single.add("fork-single", {
-  defer: true, minSamples: 100, fn(d) {
-    fork(sources[0]).then(() => d.resolve())
-  }
-}).add("thread-single", {
-  defer: true,
-  minSamples: 100, fn(d) {
-    return new Promise(resolve => synthesis(sources[0], { htsvoice: pathToHTSVoice }).on("data", () => resolve())).then(() => d.resolve(), console.error);
-  }
-}).on('cycle', (event) => {
-  const target = event.target;
-  const stats = target.stats;
-  console.log(`${target.name}: mean:${stats.mean}sec, ±${stats.rme}% (sample count:${stats.sample.length})`);
-}).on('complete', () => {
-  console.log(`Single Fastest is ${suite_single.filter('fastest').map('name')}`)
-}).run();
+const fork = process.platform === 'win32' ? txt => synthesisFork("./open_jtalk.exe", sjis_dictionary_dir, pathToHTSVoice, txt, "Shift_JIS") : txt => synthesisFork("./open_jtalk", dictionary_dir, pathToHTSVoice, txt);
+exports.fork = fork;
+exports.sources = sources;
+exports.synthesis = synthesis;
+exports.pathToHTSVoice = pathToHTSVoice;
