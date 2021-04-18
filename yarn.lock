@@ -456,10 +456,10 @@ node-openjtalk-binding-discordjs@^1.0.0-rc.3:
   dependencies:
     node-openjtalk-binding "^1.0.0-rc.11"
 
-node-openjtalk-binding@1.0.0-rc.12:
-  version "1.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/node-openjtalk-binding/-/node-openjtalk-binding-1.0.0-rc.12.tgz#0697b45f6a12dd1028488cd02cea47b6afc87c90"
-  integrity sha512-ej8ZhP5tZPRiJ3aAZfLBsTam8hsMgARzjfu0DO4002+tMKH3xjrpQSaxv8Zcc2GUAlpcMKF0G4zBz+pOtwtfZQ==
+node-openjtalk-binding@1.0.0-rc.13:
+  version "1.0.0-rc.13"
+  resolved "https://registry.yarnpkg.com/node-openjtalk-binding/-/node-openjtalk-binding-1.0.0-rc.13.tgz#665db560f262f4d06c1e594ce0fb2e49ad4c5dc9"
+  integrity sha512-qTjv9VddaotLe1ta0AL6AcY3FIa3Y9+BlAaRrQpj5ndCxqWe+cmD7wWNr2SEGTft0EH/MBrlu+PigHfV+RHXRA==
   dependencies:
     bindings "^1.5.0"
     node-addon-api "^3.1.0"
