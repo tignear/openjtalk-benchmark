@@ -19,13 +19,13 @@ gcc (Ubuntu 9.3.0-10ubuntu2) 9.3.0
 node.js v14.16.0
 ## node single.js
 ```
-fork-single: mean:1.5292322194174752sec, ±0.12843319509084392% (sample count:103)
-thread-single: mean:0.9080964466666668sec, ±1.214466088078281% (sample count:105)
+fork-single: mean:1.5507313572815526sec, ±0.517922656418563% (sample count:103)
+thread-single: mean:0.7113056216981131sec, ±0.3031245204435511% (sample count:106)
 Single Fastest is thread-single
 ```
 ## node multi.js
 ```
-fork-multi: mean:10.40474801sec, mean/number of entry: 0.05419139588541667sec, ±5.229742699461581% (sample count:10)
-thread-multi: mean:7.80502331sec, mean/number of entry: 0.04065116307291667sec, ±3.7502264730418378% (sample count:10)
+fork-multi: mean:11.927693999999999sec, mean/number of entry: 0.06212340624999999sec, ±3.7596627438525703% (sample count:10)
+thread-multi: mean:6.61741527sec, mean/number of entry: 0.03446570453125sec, ±0.865607782852954% (sample count:10)
 Multi Fastest is thread-multi
 ```
